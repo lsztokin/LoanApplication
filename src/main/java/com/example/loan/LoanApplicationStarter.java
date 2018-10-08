@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LoanApplication {
+public class LoanApplicationStarter {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LoanApplication.class, args);
+	public static void main(String[] args) 
+	{	SpringApplication.run(LoanApplicationStarter.class, args);
 	}
 }
