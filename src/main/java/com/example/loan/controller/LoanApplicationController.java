@@ -16,23 +16,15 @@ public class LoanApplicationController
 	@Autowired
 	private LoanApplicationService loanApplicationService;
 	
-	@PostMapping("/add/{amount}/{termInDays}")
-	public String addLoanPost(@PathVariable double amount, @PathVariable int termInDays)
-	{	
-		String result = loanApplicationService.applyForCredit(amount, termInDays);
-		return result;
-	}
-	
 	@GetMapping("/add/{amount}/{termInDays}")
-	public String addLoanGet(@PathVariable double amount, @PathVariable int termInDays)
-	{	
-		String result = "GET Zawnioskowano o " + amount + " na " + termInDays + " dni.";
+	public String addLoanPost(@PathVariable double amount, @PathVariable int termInDays)
+	{	String result = loanApplicationService.applyForCredit(amount, termInDays);
 		return result;
 	}
 	
-	@PostMapping("/extend/{loanId}")
+	@GetMapping("/extend/{loanId}")
 	public String extendLoanPost(@PathVariable long loanId)
 	{	
-		return loanApplicationService.extendCreditTerm(loanId);
+		return loanApplicationService.extendLoanTerm(loanId);
 	}
 }

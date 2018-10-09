@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Loan 
 {	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@OneToOne

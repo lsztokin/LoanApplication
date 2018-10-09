@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class LoanApplication 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	private LocalDateTime creationTimestamp;
@@ -24,10 +24,20 @@ public class LoanApplication
 	@NotNull
 	private int termInDays;
 	
-	private LoanStatus status;
+	private LoanApplicationStatus status;
 	
 	@OneToOne(mappedBy="loanApplication")
 	private Loan loan;
+	
+	public LoanApplication() {};
+
+	public LoanApplication(@NotNull double amount, @NotNull int termInDays) {
+		super();
+		this.amount = amount;
+		this.termInDays = termInDays;
+	}
+
+
 
 	public long getId() {
 		return id;
@@ -61,11 +71,11 @@ public class LoanApplication
 		this.termInDays = termInDays;
 	}
 
-	public LoanStatus getStatus() {
+	public LoanApplicationStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(LoanStatus status) {
+	public void setStatus(LoanApplicationStatus status) {
 		this.status = status;
 	}
 

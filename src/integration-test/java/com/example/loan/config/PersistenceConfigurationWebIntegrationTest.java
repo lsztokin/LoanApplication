@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PersistenceConfiguration {
+public class PersistenceConfigurationWebIntegrationTest {
 	
-//	@Bean
-//	@ConfigurationProperties(prefix="spring.datasource")
-//	public DataSource dataSource()
-//	{	return DataSourceBuilder.create().build();
-//	}
+	@Bean
+	@ConfigurationProperties(prefix="spring.datasource")
+	public DataSource dataSource()
+	{	return DataSourceBuilder.create().build();
+	}
 }

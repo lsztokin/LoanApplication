@@ -43,7 +43,7 @@ public class LoanApplicationControllerTest
 	{
 		long loanId = 7L;
 		String expectedResponse = "accepted";
-		when(loanApplicationService.extendCreditTerm(loanId)).thenReturn(expectedResponse);
+		when(loanApplicationService.extendLoanTerm(loanId)).thenReturn(expectedResponse);
 		String response = loanApplicationController.extendLoanPost(loanId);
 		
 		assertThat(response, is(expectedResponse));
