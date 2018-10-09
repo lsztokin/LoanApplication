@@ -22,7 +22,7 @@ public class Loan
 	
 	private Double amount;
 	
-	private Double interest;
+	private Double interestAmount;
 	
 	private LocalDate startDate;
 	
@@ -54,14 +54,6 @@ public class Loan
 		this.amount = amount;
 	}
 
-	public Double getInterest() {
-		return interest;
-	}
-
-	public void setInterest(Double interest) {
-		this.interest = interest;
-	}
-
 	public LocalDate getStartDate() {
 		return startDate;
 	}
@@ -85,6 +77,16 @@ public class Loan
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
+
+	public Double getInterestAmount() {
+		return interestAmount;
+	}
+
+	public void setInterestAmount(Double interestAmount) {
+		this.interestAmount = interestAmount;
+	}
+	
+	
 	
 	
 }

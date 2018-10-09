@@ -12,34 +12,32 @@ import com.example.loan.model.LoanApplicationStatus;
 import com.example.loan.param.LoanParameters;
 import com.example.loan.repository.LoanApplicationRepository;
 import com.example.loan.repository.LoanRepository;
-import com.example.loan.util.TimestampFactory;
+import com.example.loan.util.LoanApplicarionFactory;
+import com.example.loan.util.LoanFactory;
 import com.example.loan.verification.LoanVerificaticator;
 
 @Service
 public class LoanApplicationServiceOnLoanRepositories implements LoanApplicationService 
 {
 	@Autowired
-	LoanApplicationRepository loanApplicationRepository;
+	private LoanApplicationRepository loanApplicationRepository;
 	
 	@Autowired
-	LoanRepository loanRepository;
+	private LoanRepository loanRepository;
 	
 	@Autowired
-	LoanVerificaticator verificator;
+	private LoanParameters loanParams;
 	
 	@Autowired
-	LoanParameters loanParams;
+	private LoanFactory loanFactory;
 	
 	@Autowired
-	TimestampFactory timestampFactory;
+	private LoanApplicarionFactory loanApplicationFactory;
 	
-
 	@Override
-	public String applyForCredit(double amount, int termInDays) 
-	{	LoanApplication application = new LoanApplication(amount, termInDays);
-		application.setCreationTimestamp(timestampFactory.getCurrentDateTime());
-		setApplicationStatus(application);
-		
+	public String applyForLoan(double amount, int termInDays) 
+	{	
+		LoanApplication application = loanApplicationFactory.createLoanApplication(amount, termInDays);
 		application = loanApplicationRepository.save(application);
 		
 		
@@ -50,17 +48,6 @@ public class LoanApplicationServiceOnLoanRepositories implements LoanApplication
 		
 		return "" + application.getStatus() + ( loanId != null ? ":" + loanId : "");
 	}
-
-	private void setApplicationStatus(LoanApplication application) 
-	{	boolean isApplicationAccepted = verificator.accept(application);
-		
-		if(isApplicationAccepted)
-		{	application.setStatus(LoanApplicationStatus.APPROVED);
-		}
-		else
-		{	application.setStatus(LoanApplicationStatus.REJECTED);
-		}
-	}
 	
 	private boolean isApplicationAccepted(LoanApplication application) 
 	{	if(application.getStatus() != null && application.getStatus() == LoanApplicationStatus.APPROVED)
@@ -70,13 +57,7 @@ public class LoanApplicationServiceOnLoanRepositories implements LoanApplication
 	}
 
 	private long registerNewLoan(LoanApplication application) 
-	{	Loan loan = new Loan();
-		loan.setAmount(application.getAmount());
-		loan.setStartDate(LocalDate.now());
-		loan.setDueDate(LocalDate.now().plusDays(application.getTermInDays()));
-		loan.setOriginalDueDate(LocalDate.now().plusDays(application.getTermInDays()));
-		loan.setLoanApplication(application);
-		
+	{	Loan loan = loanFactory.createLoan(application);
 		loan = loanRepository.save(loan);
 		
 		return loan.getId();
@@ -95,9 +76,9 @@ public class LoanApplicationServiceOnLoanRepositories implements LoanApplication
 			{	dueDate = dueDate.plusDays(loanParams.getExtensionTermInDays());
 				loan.setDueDate(dueDate);
 				loanRepository.save(loan);
+				
+				return LoanApplicationStatus.APPROVED.toString();
 			}
-			
-			return LoanApplicationStatus.APPROVED.toString();
 		}
 		
 		return LoanApplicationStatus.REJECTED.toString();

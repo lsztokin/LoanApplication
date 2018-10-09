@@ -17,5 +17,5 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @Sql(scripts = "/clean-up.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 @ActiveProfiles("test")
 public abstract class AbstractTest 
-{
+{ //
 }
