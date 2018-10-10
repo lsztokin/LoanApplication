@@ -1,12 +1,17 @@
 package com.example.loan.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.example.loan.model.LoanApplication;
 import com.example.loan.model.LoanApplicationStatus;
 import com.example.loan.verification.LoanVerificaticator;
 
-public class LoanApplicarionFactory 
+@Component
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class LoanApplicationFactory 
 {	
 	@Autowired
 	private LoanVerificaticator loanVerificator;

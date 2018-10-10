@@ -30,7 +30,7 @@ public class LoanApplicationControllerTest
 	@Test
 	public void postLoanRequest()
 	{	
-		String expectedResponse = "accepted: 7";
+		String expectedResponse = "accepted:7";
 		
 		when(loanApplicationService.applyForLoan(100, 30)).thenReturn(expectedResponse);
 		String response = loanApplicationController.addLoanPost(100.0, 30);
@@ -48,7 +48,4 @@ public class LoanApplicationControllerTest
 		
 		assertThat(response, is(expectedResponse));
 	}
-	
-	
-
 }

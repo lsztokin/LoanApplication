@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.example.loan.model.Loan;
@@ -12,11 +14,11 @@ import com.example.loan.model.LoanApplicationStatus;
 import com.example.loan.param.LoanParameters;
 import com.example.loan.repository.LoanApplicationRepository;
 import com.example.loan.repository.LoanRepository;
-import com.example.loan.util.LoanApplicarionFactory;
+import com.example.loan.util.LoanApplicationFactory;
 import com.example.loan.util.LoanFactory;
-import com.example.loan.verification.LoanVerificaticator;
 
 @Service
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class LoanApplicationServiceOnLoanRepositories implements LoanApplicationService 
 {
 	@Autowired
@@ -32,14 +34,13 @@ public class LoanApplicationServiceOnLoanRepositories implements LoanApplication
 	private LoanFactory loanFactory;
 	
 	@Autowired
-	private LoanApplicarionFactory loanApplicationFactory;
+	private LoanApplicationFactory loanApplicationFactory;
 	
 	@Override
 	public String applyForLoan(double amount, int termInDays) 
 	{	
 		LoanApplication application = loanApplicationFactory.createLoanApplication(amount, termInDays);
 		application = loanApplicationRepository.save(application);
-		
 		
 		Long loanId = null;
 		if(isApplicationAccepted(application))

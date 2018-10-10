@@ -3,6 +3,8 @@ package com.example.loan.util;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.example.loan.model.Loan;
@@ -10,6 +12,7 @@ import com.example.loan.model.LoanApplication;
 import com.example.loan.param.LoanParameters;
 
 @Component
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class LoanFactory 
 {
 	@Autowired
@@ -17,12 +20,14 @@ public class LoanFactory
 	
 	public Loan createLoan(LoanApplication application)
 	{	
+		LocalDate startDate = application.getCreationTimestamp().toLocalDate();
+		double interestAmount = calculateRoundedInterestAmount(application);
+		
 		Loan loan = new Loan();
 		loan.setAmount(application.getAmount());
-		loan.setStartDate(LocalDate.now());
-		loan.setDueDate(LocalDate.now().plusDays(application.getTermInDays()));
-		loan.setOriginalDueDate(LocalDate.now().plusDays(application.getTermInDays()));
-		double interestAmount = calculateRoundedInterestAmount(application);
+		loan.setStartDate(startDate);
+		loan.setDueDate(startDate.plusDays(application.getTermInDays()));
+		loan.setOriginalDueDate(startDate.plusDays(application.getTermInDays()));
 		loan.setInterestAmount(interestAmount);
 		loan.setLoanApplication(application);
 		

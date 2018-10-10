@@ -3,13 +3,15 @@ package com.example.loan.verification;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.example.loan.model.LoanApplication;
 import com.example.loan.param.LoanParameters;
-import com.example.loan.util.TimestampFactory;
 
 @Service
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BasicLoanVerificator implements LoanVerificaticator 
 {
 	@Autowired
