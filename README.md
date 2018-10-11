@@ -2,8 +2,8 @@
 Prosty moduł do przetwarzania wniosków o kredyt (SpringBoot, Hibernate, REST)
 
 usługi (POST na porcie 8080)
-/loan/add/{kwota_kredytu}/{czas_kredytowania_w_dniach}
-/loan/extend/{id_kredytu}
+- /loan/add/{kwota_kredytu}/{czas_kredytowania_w_dniach}
+- /loan/extend/{id_kredytu}
 
 Wymagania:
 - REST API
