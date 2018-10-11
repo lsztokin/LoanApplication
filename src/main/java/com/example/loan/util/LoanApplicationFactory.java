@@ -3,14 +3,15 @@ package com.example.loan.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.loan.model.LoanApplication;
 import com.example.loan.model.LoanApplicationStatus;
 import com.example.loan.verification.LoanVerificaticator;
 
-@Component
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class LoanApplicationFactory 
 {	
 	@Autowired

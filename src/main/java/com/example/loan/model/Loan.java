@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Loan 
@@ -17,17 +18,22 @@ public class Loan
 	private long id;
 	
 	@OneToOne
-	@JoinColumn(name = "application_id")
+	@JoinColumn(name = "application_id", nullable=false)
 	private LoanApplication loanApplication;
 	
+	@NotNull
 	private Double amount;
 	
+	@NotNull
 	private Double interestAmount;
 	
+	@NotNull
 	private LocalDate startDate;
 	
+	@NotNull
 	private LocalDate originalDueDate;
 	
+	@NotNull
 	private LocalDate dueDate;
 
 	public long getId() {

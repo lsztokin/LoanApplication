@@ -11,7 +11,7 @@ import com.example.loan.model.LoanApplication;
 import com.example.loan.param.LoanParameters;
 
 @Service
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BasicLoanVerificator implements LoanVerificaticator 
 {
 	@Autowired

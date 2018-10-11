@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.example.loan.model.Loan;
 import com.example.loan.model.LoanApplication;
@@ -17,8 +19,9 @@ import com.example.loan.repository.LoanRepository;
 import com.example.loan.util.LoanApplicationFactory;
 import com.example.loan.util.LoanFactory;
 
-@Service
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Component
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Transactional
 public class LoanApplicationServiceOnLoanRepositories implements LoanApplicationService 
 {
 	@Autowired
